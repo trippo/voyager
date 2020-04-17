@@ -52,17 +52,12 @@ class VoyagerBaseController extends Controller
             $searchable = SchemaManager::describeTable(app($dataType->model_name)->getTable())->pluck('name')->toArray();
             $dataRow = Voyager::model('DataRow')->whereDataTypeId($dataType->id)->get();
             foreach ($searchable as $key => $value) {
-<<<<<<< HEAD
-                $displayName = $dataRow->where('field', $value)->first() ? $dataRow->where('field', $value)->first()->getTranslatedAttribute('display_name') : null;
-                $searchNames[$value] = $displayName ?: ucwords(str_replace('_', ' ', $value));
-=======
                 $field = $dataRow->where('field', $value)->first();
                 $displayName = ucwords(str_replace('_', ' ', $value));
                 if ($field !== null) {
                     $displayName = $field->getTranslatedAttribute('display_name');
                 }
                 $searchNames[$value] = $displayName;
->>>>>>> f4e6775364a00716a85b8f0fdfe729df68a47913
             }
         }
 
@@ -778,13 +773,8 @@ class VoyagerBaseController extends Controller
             ]);
         }
 
-<<<<<<< HEAD
-        $model = app($dataType->model_name)->query();
-        if ($model && in_array(SoftDeletes::class, class_uses($model))) {
-=======
         $model = app($dataType->model_name);
         if ($model && in_array(SoftDeletes::class, class_uses_recursive($model))) {
->>>>>>> f4e6775364a00716a85b8f0fdfe729df68a47913
             $model = $model->withTrashed();
         }
         if ($search->value != '' && $search->key && $search->filter) {
