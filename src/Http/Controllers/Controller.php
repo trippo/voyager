@@ -117,13 +117,6 @@ abstract class Controller extends BaseController
             if ($row->type == 'relationship' && $row->details->type == 'belongsToMany') {
                 // Only if select_multiple is working with a relationship
                 $multi_select[] = [
-<<<<<<< HEAD
-                    'model'       => $row->details->model,
-                    'content'     => $content,
-                    'table'       => $row->details->pivot_table,
-                    'foreign_key' => !empty($row->details->foreign_key) ? $row->details->foreign_key : null,
-                    'related_key' => !empty($row->details->related_key) ? $row->details->related_key : null,
-=======
                     'model'           => $row->details->model,
                     'content'         => $content,
                     'table'           => $row->details->pivot_table,
@@ -131,7 +124,6 @@ abstract class Controller extends BaseController
                     'relatedPivotKey' => $row->details->related_pivot_key ?? null,
                     'parentKey'       => $row->details->parent_key ?? null,
                     'relatedKey'      => $row->details->key,
->>>>>>> f4e6775364a00716a85b8f0fdfe729df68a47913
                 ];
             } else {
                 $data->{$row->field} = $content;
@@ -154,9 +146,6 @@ abstract class Controller extends BaseController
         }
 
         foreach ($multi_select as $sync_data) {
-<<<<<<< HEAD
-            $data->belongsToMany($sync_data['model'], $sync_data['table'], $sync_data['foreign_key'], $sync_data['related_key'])->sync($sync_data['content']);
-=======
             $data->belongsToMany(
                 $sync_data['model'],
                 $sync_data['table'],
@@ -165,7 +154,6 @@ abstract class Controller extends BaseController
                 $sync_data['parentKey'],
                 $sync_data['relatedKey']
             )->sync($sync_data['content']);
->>>>>>> f4e6775364a00716a85b8f0fdfe729df68a47913
         }
 
         // Rename folders for newly created data through media-picker
