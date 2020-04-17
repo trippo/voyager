@@ -96,8 +96,8 @@ class DataType extends Model
 
             if ($this->fill($requestData)->save()) {
                 $fields = $this->fields((strlen($this->model_name) != 0)
-                    ? app($this->model_name)->getTable()
-                    : Arr::get($requestData, 'name')
+                    ? DB::getTablePrefix().app($this->model_name)->getTable()
+                    : DB::getTablePrefix().Arr::get($requestData, 'name')
                 );
                 $requestData = $this->getRelationships($requestData, $fields);
                 foreach ($fields as $field) {
@@ -200,10 +200,16 @@ class DataType extends Model
                         'taggable'          => $requestData['relationship_taggable_'.$relationship] ?? '0',
                     ];
 
+<<<<<<< HEAD
                     // Build the other details
                     $otherDetails = json_decode($requestData['field_details_'.$relationship], true);
 
                     $requestData['field_details_'.$relationship] = json_encode(array_merge($otherDetails, $relationshipDetails));
+=======
+                    $details = json_decode($requestData['field_details_'.$relationship], true);
+                    $merge = array_merge($details, $relationshipDetails);
+                    $requestData['field_details_'.$relationship] = json_encode($merge);
+>>>>>>> f4e6775364a00716a85b8f0fdfe729df68a47913
                 }
             }
         }
