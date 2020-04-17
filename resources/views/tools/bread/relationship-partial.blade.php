@@ -1,13 +1,8 @@
 @php
-<<<<<<< HEAD
-    $relationshipDetails = $relationship->details;
-    $otherDetails = array_diff_key((array)$relationshipDetails,array_flip(['model','table','type','column','label','key','pivot_table','pivot','foreign_key','related_key','taggable']));
-=======
     $relationshipDetails = $relationship['details'];
     $relationshipKeyArray = array_fill_keys(["model", "table", "type", "column", "key", "label", "pivot_table", "pivot", "taggable"], '');
 
     $adv_details = array_diff_key(json_decode(json_encode($relationshipDetails), true), $relationshipKeyArray);
->>>>>>> f4e6775364a00716a85b8f0fdfe729df68a47913
 @endphp
 <div class="row row-dd row-dd-relationship">
     <div class="col-xs-2">
